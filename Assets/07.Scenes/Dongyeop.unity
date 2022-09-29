@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitTime: 1.1
-  _apertureValue: 2.5
+  _apertureValue: 2
 --- !u!114 &712260883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +934,7 @@ GameObject:
   - component: {fileID: 1748646730}
   - component: {fileID: 1748646729}
   - component: {fileID: 1748646728}
+  - component: {fileID: 1748646731}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -989,6 +990,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1748646731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748646727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals: []
+    m_Events: []
 --- !u!1 &1973991439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,8 +1039,10 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7367262412758715624, guid: 68e27da028a09b545809146aab7db9ec, type: 2}
     value: {fileID: 712260880}
-  - key: {fileID: 3300766240168266331, guid: 68e27da028a09b545809146aab7db9ec, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 217275016}
+  - key: {fileID: 2202280110142712124, guid: 68e27da028a09b545809146aab7db9ec, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1973991441
