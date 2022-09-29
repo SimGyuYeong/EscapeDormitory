@@ -123,6 +123,8 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/ModelingTest.unity
+=======
 --- !u!1001 &235934249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237,6 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ab2ec1af5089f4e827554ca39819ca, type: 3}
+>>>>>>> main:Assets/07.Scenes/ModelingTest.unity
 --- !u!1 &1437371151
 GameObject:
   m_ObjectHideFlags: 0
