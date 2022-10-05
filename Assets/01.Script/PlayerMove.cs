@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ public class PlayerMove : MonoBehaviour
     private CharacterController _characterController;
     private CollisionFlags collisionsFlags = CollisionFlags.None;
 
-    [SerializeField] private float _walkSpd = 2.0f;
-    [SerializeField] private float _runSpd = 5.0f;
+    [SerializeField] private float _walkSpd = 5.0f;
+    [SerializeField] private float _runSpd = 8.0f;
 
     private Vector3 _moveDirect;
     private float _verticalSpd = 0;
@@ -26,11 +27,31 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         BodyRotation();
+        Jump();
         SetGravity();
+        Running();
+    }
+
+    private void Running()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _isRunning = true;
+        }
+
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _isRunning = false;
+        }
     }
 
     private void Move()
     {
+        if (_characterController.isGrounded && _jumpVelocity.y < 0)
+        {
+            _jumpVelocity.y = 0f;
+        }
+
         //백터 내적
         Transform cameraTransform = Camera.main.transform;
         //메인카메라가 바라보는 방향이 월드상에서 어떤 방향인가
@@ -47,16 +68,9 @@ public class PlayerMove : MonoBehaviour
         _moveDirect = Vector3.RotateTowards(_moveDirect, targetDirect, 50.0f * Mathf.Deg2Rad * Time.deltaTime, 1000f);
         _moveDirect = _moveDirect.normalized;
 
-        float spd = _isRunning ? _walkSpd : _runSpd;
+        float spd = _isRunning ? _runSpd : _walkSpd;
 
         Vector3 amount = (_moveDirect * spd * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
-        }
-        _jumpVelocity.y += _verticalSpd;
-        _characterController.Move(_jumpVelocity * Time.deltaTime);
 
         collisionsFlags = _characterController.Move(amount);
     }
@@ -67,6 +81,16 @@ public class PlayerMove : MonoBehaviour
         newForward.y = 0;
 
         transform.forward = Vector3.Lerp(transform.forward, newForward, 50.0f * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
+        }
+        _jumpVelocity.y += _verticalSpd;
+        _characterController.Move(_jumpVelocity * Time.deltaTime);
     }
 
     private void SetGravity()
