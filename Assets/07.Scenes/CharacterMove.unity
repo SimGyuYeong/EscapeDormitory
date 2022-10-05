@@ -318,6 +318,7 @@ MonoBehaviour:
   rotationX: 0
   rotationY: 0
   posFirstameraTarget: {fileID: 1031626253}
+  character: {fileID: 302406534}
 --- !u!1 &302406530 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 11e3f3e81c17937459aef543899c3932, type: 3}

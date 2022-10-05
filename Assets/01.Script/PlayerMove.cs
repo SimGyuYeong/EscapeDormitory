@@ -6,12 +6,16 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController _characterController;
+    private CollisionFlags collisionsFlags = CollisionFlags.None;
 
     [SerializeField] private float _walkSpd = 2.0f;
     [SerializeField] private float _runSpd = 5.0f;
 
     private Vector3 _moveDirect;
+    private float _verticalSpd = 0;
+    private float _gravity = 0.8f;
     private bool _isRunning = false;
+    private Vector3 _jumpVelocity;
 
     private void Awake()
     {
@@ -22,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         BodyRotation();
+        SetGravity();
     }
 
     private void Move()
@@ -46,7 +51,14 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 amount = (_moveDirect * spd * Time.deltaTime);
 
-        _characterController.Move(amount);
+        if (Input.GetButtonDown("Jump"))
+        {
+            _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
+        }
+        _jumpVelocity.y += _verticalSpd;
+        _characterController.Move(_jumpVelocity * Time.deltaTime);
+
+        collisionsFlags = _characterController.Move(amount);
     }
 
     private void BodyRotation()
@@ -55,5 +67,17 @@ public class PlayerMove : MonoBehaviour
         newForward.y = 0;
 
         transform.forward = Vector3.Lerp(transform.forward, newForward, 50.0f * Time.deltaTime);
+    }
+
+    private void SetGravity()
+    {
+        if ((collisionsFlags & CollisionFlags.CollidedBelow) != 0)
+        {
+            _verticalSpd = 0f;
+        }
+        else
+        {
+            _verticalSpd -= _gravity * Time.deltaTime;
+        }
     }
 }
