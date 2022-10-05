@@ -313,10 +313,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objTarget: {fileID: 1031626252}
-  detailX: 5
-  detailY: 5
+  rotateSpeed: 1
+  detailX: 2
+  detailY: 2
   rotationX: 0
   rotationY: 0
+  minY: 0
+  maxY: 0
   posFirstameraTarget: {fileID: 1031626253}
   character: {fileID: 302406534}
 --- !u!1 &302406530 stripped
@@ -336,8 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb930db27cb4194eb14b1c6bcfeb603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpd: 2
-  _runSpd: 5
+  _walkSpd: 0.5
+  _runSpd: 1.5
 --- !u!143 &302406532
 CharacterController:
   m_ObjectHideFlags: 0
