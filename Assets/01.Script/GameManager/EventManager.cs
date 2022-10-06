@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
 
     public event Action ExampleEvent;
 
-    private void Awake()
+    private void Awake()    
     {
         if (Instance == null)
         {
@@ -24,12 +24,13 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        //event invoke    
-    }
+        //event?.Invoke    
+    }   
 
-    //enter 함수
+    
 
-    //event 를 사용하는 스크립트
+
+    //event 를 사용하는 스크립트는
     //private void OnDisabled()
     //{
     // eventmanager.변수이름     -=event
