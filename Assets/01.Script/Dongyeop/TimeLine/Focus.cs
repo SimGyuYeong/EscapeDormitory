@@ -8,21 +8,19 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
     [SerializeField] private float _waitTime = 1.1f;
     [SerializeField] private float _apertureValue = 2.5f;
 
-    private PostProcessVolume _postProcess;
-    
     private bool _isApertureUp = false;
 
+    [HideInInspector] public PostProcessVolume postProcess;
     [HideInInspector] public DepthOfField depthOfField;
 
     private void Awake()
     {
-        _postProcess = GetComponent<PostProcessVolume>();
-        _postProcess.sharedProfile.TryGetSettings<DepthOfField>(out depthOfField);
+        postProcess = GetComponent<PostProcessVolume>();
+        postProcess.sharedProfile.TryGetSettings<DepthOfField>(out depthOfField);
     }
 
     private void Start()
     {
-        depthOfField.active = true;
         depthOfField.aperture.value = 0.1f;
         StartCoroutine(ApertureChangeSetting());
     }
