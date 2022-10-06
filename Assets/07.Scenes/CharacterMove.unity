@@ -339,8 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb930db27cb4194eb14b1c6bcfeb603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpd: 0.5
-  _runSpd: 1.5
+  _walkSpd: 5
+  _runSpd: 7
 --- !u!143 &302406532
 CharacterController:
   m_ObjectHideFlags: 0
