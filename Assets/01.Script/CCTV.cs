@@ -16,24 +16,26 @@ public class CCTV : MonoBehaviour
     private Vector3 _leftRotateVec;
     private Vector3 _rightRotateVec;
 
+    Sequence _camAutoMoveSeq;
+
     private void Start()
     {
         _leftRotateVec = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y - 30f, transform.eulerAngles.z);
         _rightRotateVec = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 30f, transform.eulerAngles.z);
 
-        StartCoroutine(CameraMove());
+        transform.DORotate(_leftRotateVec, 0);
+
+        _camAutoMoveSeq = DOTween.Sequence()
+            .SetAutoKill(false)
+            .Append(transform.DORotate(_rightRotateVec, _moveDuration))
+            .AppendInterval(_waitDuration)
+            .Append(transform.DORotate(_leftRotateVec, _moveDuration))
+            .AppendInterval(_waitDuration)
+            .SetLoops(-1);
     }
 
-    private IEnumerator CameraMove()
+    private void OnEnable()
     {
-        while(true)
-        {
-            Sequence seq = DOTween.Sequence();
-            seq.Append(transform.DORotate(_rightRotateVec, _moveDuration));
-            seq.AppendInterval(_waitDuration);
-            seq.Append(transform.DORotate(_leftRotateVec, _moveDuration));
-            seq.AppendInterval(_waitDuration);
-            yield return new WaitForSeconds(seq.Duration());
-        }
+        _camAutoMoveSeq.Restart();
     }
 }
