@@ -6,13 +6,15 @@ using UnityEngine;
 public class CameraRay : MonoBehaviour
 {
     [SerializeField]
-    private float range = 0f;
+    private float range = 10f;
 
     [SerializeField]
-    private RaycastHit layer;
+    private RaycastHit hitinfo;
 
     [SerializeField]
     private LayerMask layerMask;
+
+    string infoname = null;
 
     void Start()
     {
@@ -26,17 +28,23 @@ public class CameraRay : MonoBehaviour
 
     private void RayCastShoot()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out layer, range, layerMask))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, range, layerMask))
         {
-            if(layer.transform.tag == "bell")
+            if (hitinfo.transform.tag == "bell")
             {
-                InfoUP();
+                EventManager.eventManager.InfoUP();
             }
+
         }
     }
 
-    private void InfoUP()
-    {
+    
 
-    }
+        
+
+
+
+    
+
+    
 }
