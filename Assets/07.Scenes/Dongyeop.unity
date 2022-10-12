@@ -750,6 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flickerTimeSec: 1.75
+  eyeImage: {fileID: 0}
 --- !u!1 &1051707233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1167,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: aa541a2daf4406747ac60627501411a4, type: 2}
     - {fileID: 11400000, guid: 1feddd5e1dcae5e41aaf47890435948f, type: 2}
     - {fileID: 11400000, guid: b4257caf9ba4da24dad36759e360bbfc, type: 2}
+    - {fileID: 11400000, guid: 513a7cdbadb2c564985b839f4433d75b, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1200,6 +1202,20 @@ MonoBehaviour:
         - m_Target: {fileID: 712260886}
           m_TargetAssemblyTypeName: Flicker, Assembly-CSharp
           m_MethodName: TimeLineStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 712260885}
+          m_TargetAssemblyTypeName: TimeLineEnd, Assembly-CSharp
+          m_MethodName: TimeLineFadeOutEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
