@@ -315,7 +315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &667622600
 GameObject:
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -643,8 +643,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a76511c10bf14985814e6b54503a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 1.1
-  _apertureValue: 2
+  _waitTime: 1.5
+  _apertureValue: 12.5
+  postProcess: {fileID: 0}
   depthOfField: {fileID: 0}
 --- !u!114 &712260883
 MonoBehaviour:
@@ -735,6 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a4103684adc9f4f90493d4b6e6f23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _noneProfile: {fileID: 11400000, guid: 38162d7d59857064daf1235315da7219, type: 2}
 --- !u!114 &712260886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,8 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5d1c4877c795b438e44922ff4c7fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flickerTimeSec: 2
-  _isFlicker: 0
+  _flickerTimeSec: 1.75
 --- !u!1 &1051707233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1147,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1973991442
 MonoBehaviour:
@@ -1164,6 +1165,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: aa541a2daf4406747ac60627501411a4, type: 2}
     - {fileID: 11400000, guid: 1feddd5e1dcae5e41aaf47890435948f, type: 2}
+    - {fileID: 11400000, guid: b4257caf9ba4da24dad36759e360bbfc, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -1184,6 +1186,20 @@ MonoBehaviour:
         - m_Target: {fileID: 712260886}
           m_TargetAssemblyTypeName: Flicker, Assembly-CSharp
           m_MethodName: ThisFlicker
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 712260886}
+          m_TargetAssemblyTypeName: Flicker, Assembly-CSharp
+          m_MethodName: TimeLineStart
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
