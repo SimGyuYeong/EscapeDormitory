@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 targetDirect = horizontal * right + vertical * foward;
 
-        _moveDirect = Vector3.RotateTowards(_moveDirect, targetDirect, 100.0f * Mathf.Deg2Rad * Time.deltaTime, 1000f);
+        _moveDirect = Vector3.RotateTowards(_moveDirect, targetDirect, 500.0f * Mathf.Deg2Rad * Time.deltaTime, 1000f);
         _moveDirect = _moveDirect.normalized;
 
         float spd = _isRunning ? _runSpd : _walkSpd;
