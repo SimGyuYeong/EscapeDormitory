@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager Instance;
+    public static EventManager eventManager;
 
-    public event Action ExampleEvent;
+    public UnityEvent INFOUP;
 
-    private void Awake()
+    public event Action InfoUpAction;
+    
+
+    private void Awake()    
     {
-        if (Instance == null)
+        if (eventManager == null)
         {
-            Instance = this;
+            eventManager = this;
         }
         else
         {
@@ -22,14 +26,13 @@ public class EventManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
+    public void InfoUP()
     {
-        //event invoke    
+        INFOUP?.Invoke();
     }
 
-    //enter 함수
 
-    //event 를 사용하는 스크립트
+    //event 를 사용하는 스크립트는
     //private void OnDisabled()
     //{
     // eventmanager.변수이름     -=event
