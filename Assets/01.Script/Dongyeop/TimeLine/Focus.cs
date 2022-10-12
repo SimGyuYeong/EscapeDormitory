@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-public class Focus : MonoBehaviour //초점을 나갔다 다시 돌아왔다 시키는 스크립트
+public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
 {
     [SerializeField] private float _waitTime = 1.1f;
     [SerializeField] private float _apertureValue = 2.5f;
 
-    private PostProcessVolume _postProcess;
-    private DepthOfField _depthOfField;
-
     private bool _isApertureUp = false;
+
+    [HideInInspector] public PostProcessVolume postProcess;
+    [HideInInspector] public DepthOfField depthOfField;
 
     private void Awake()
     {
-        _postProcess = GetComponent<PostProcessVolume>();
-        _postProcess.sharedProfile.TryGetSettings<DepthOfField>(out _depthOfField);
+        postProcess = GetComponent<PostProcessVolume>();
+        postProcess.sharedProfile.TryGetSettings<DepthOfField>(out depthOfField);
     }
 
     private void Start()
     {
-        _depthOfField.aperture.value = 0.1f;
+        depthOfField.aperture.value = 0.1f;
         StartCoroutine(ApertureChangeSetting());
     }
 
@@ -41,11 +41,11 @@ public class Focus : MonoBehaviour //초점을 나갔다 다시 돌아왔다 시키는 스크립트
         ApertureChange();
     }
 
-    private void ApertureChange()
+    private void ApertureChange() //포커스 관련
     {
         if (_isApertureUp)
-            _depthOfField.aperture.value += _apertureValue * Time.deltaTime;
+            depthOfField.aperture.value += _apertureValue * Time.deltaTime;
         else
-            _depthOfField.aperture.value -= _apertureValue * Time.deltaTime;
+            depthOfField.aperture.value -= _apertureValue * Time.deltaTime;
     }
 }
