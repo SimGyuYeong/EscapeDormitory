@@ -643,8 +643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779a76511c10bf14985814e6b54503a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 1.5
-  _apertureValue: 12.5
+  _waitTime: 1
+  _apertureValue: 10
   postProcess: {fileID: 0}
   depthOfField: {fileID: 0}
 --- !u!114 &712260883
