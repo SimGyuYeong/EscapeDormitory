@@ -729,7 +729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &771835718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1388,7 +1388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1941332014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1803,4 +1803,4 @@ MonoBehaviour:
   cctvLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  _image: {fileID: 0}
+  _image: {fileID: 771835719}

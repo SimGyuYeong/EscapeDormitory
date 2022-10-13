@@ -9,6 +9,7 @@ public class CCTVViewer : MonoBehaviour
     private LayerMask cctvLayerMask;
 
     private RaycastHit _hit;
+    private CCTV _viewCCtv;
 
     [SerializeField]
     private RawImage _image;
@@ -19,9 +20,20 @@ public class CCTVViewer : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
             {
-                Material mat = _hit.transform.GetComponent<CCTV>().ZoomIn();
-                
+                _viewCCtv = _hit.transform.GetComponent<CCTV>();
+                Material mat = _viewCCtv.ZoomIn();
+                _image.transform.gameObject.SetActive(true);
+                _image.texture = mat.mainTexture;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(_image.gameObject.activeSelf == true)
+            {
+                _image.transform.gameObject.SetActive(false);
             }
         }
     }
+
 }
