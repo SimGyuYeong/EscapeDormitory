@@ -6,8 +6,6 @@ public class CameraMove : MonoBehaviour
 {
     [Header("카메라 기본속성")]
     private Transform _camTransform = null; //카메라 캐싱준비
-    public GameObject objTarget = null;
-    private Transform _objTargetTransform = null;
     public float rotateSpeed = 4.0f;
 
     //마우스 카메라 조절 좌표
@@ -17,9 +15,6 @@ public class CameraMove : MonoBehaviour
     //마우스 회전값
     public float rotationX = 0f;
     public float rotationY = 0f;
-
-    public float minY = 0f;
-    public float maxY = 0f;
 
     //캐릭터에 카메라 눈 장작 포인트
     public Transform posFirstameraTarget = null;
@@ -39,10 +34,6 @@ public class CameraMove : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (objTarget == null) return;
-
-        if (_objTargetTransform == null) _objTargetTransform = objTarget.transform;
-
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
@@ -56,7 +47,7 @@ public class CameraMove : MonoBehaviour
         if (rotationY >= 80F) rotationY = 80f;
 
         _camTransform.localEulerAngles = new Vector3(-rotationY, rotationX);
-        _camTransform.position = posFirstameraTarget.position;
         character.localEulerAngles = new Vector3(0, rotationX, 0);
+        _camTransform.position = posFirstameraTarget.position;
     }
 }
