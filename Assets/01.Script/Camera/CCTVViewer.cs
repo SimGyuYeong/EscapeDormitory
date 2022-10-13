@@ -13,11 +13,12 @@ public class CCTVViewer : MonoBehaviour
 
     [SerializeField]
     private RawImage _image;
+    public bool CCTVVIewing => _image.gameObject.activeSelf;
 
     private void Update()
     {
         if (Input.GetMouseButton(0))
-        {
+        { 
             if (Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
             {
                 _viewCCtv = _hit.transform.GetComponent<CCTV>();
