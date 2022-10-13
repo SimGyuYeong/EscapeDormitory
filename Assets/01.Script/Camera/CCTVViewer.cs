@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerCCTV : MonoBehaviour
+public class CCTVViewer : MonoBehaviour
 {
     [SerializeField]
     private LayerMask cctvLayerMask;
 
     private RaycastHit _hit;
+
+    [SerializeField]
+    private RawImage _image;
 
     private void Update()
     {
@@ -15,7 +19,8 @@ public class PlayerCCTV : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
             {
-                _hit.transform.GetComponent<CCTV>().ZoomIn();
+                Material mat = _hit.transform.GetComponent<CCTV>().ZoomIn();
+                
             }
         }
     }

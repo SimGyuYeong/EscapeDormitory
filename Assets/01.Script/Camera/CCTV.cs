@@ -42,10 +42,10 @@ public class CCTV : MonoBehaviour
         _camAutoMoveSeq.Restart();
     }
 
-    public void ZoomIn()
+    public Material ZoomIn()
     {
         _camAutoMoveSeq.Kill();
-        Debug.Log(transform.name);
+        return transform.GetComponent<MeshRenderer>().material;
     }
 
     public void ZoomOut()
