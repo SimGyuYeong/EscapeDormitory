@@ -16,9 +16,6 @@ public class CameraMove : MonoBehaviour
     public float rotationX = 0f;
     public float rotationY = 0f;
 
-    public float minY = 0f;
-    public float maxY = 0f;
-
     //캐릭터에 카메라 눈 장작 포인트
     public Transform posFirstameraTarget = null;
 
@@ -50,7 +47,7 @@ public class CameraMove : MonoBehaviour
         if (rotationY >= 80F) rotationY = 80f;
 
         _camTransform.localEulerAngles = new Vector3(-rotationY, rotationX);
-        _camTransform.position = posFirstameraTarget.position;
         character.localEulerAngles = new Vector3(0, rotationX, 0);
+        _camTransform.position = posFirstameraTarget.position;
     }
 }
