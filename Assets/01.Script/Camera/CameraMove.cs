@@ -6,8 +6,6 @@ public class CameraMove : MonoBehaviour
 {
     [Header("카메라 기본속성")]
     private Transform _camTransform = null; //카메라 캐싱준비
-    public GameObject objTarget = null;
-    private Transform _objTargetTransform = null;
     public float rotateSpeed = 4.0f;
 
     //마우스 카메라 조절 좌표
@@ -39,10 +37,6 @@ public class CameraMove : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (objTarget == null) return;
-
-        if (_objTargetTransform == null) _objTargetTransform = objTarget.transform;
-
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
