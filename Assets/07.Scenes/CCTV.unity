@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d209fb63d0a76d43ba23ccbf78ddcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objTarget: {fileID: 0}
+  objTarget: {fileID: 2090930219}
   rotateSpeed: 4
   detailX: 2
   detailY: 2
@@ -469,8 +469,8 @@ MonoBehaviour:
   rotationY: 0
   minY: 0
   maxY: 0
-  posFirstameraTarget: {fileID: 0}
-  character: {fileID: 0}
+  posFirstameraTarget: {fileID: 684130863}
+  character: {fileID: 2090930223}
 --- !u!1 &327346088
 GameObject:
   m_ObjectHideFlags: 0

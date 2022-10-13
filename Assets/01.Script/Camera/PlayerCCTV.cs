@@ -7,21 +7,16 @@ public class PlayerCCTV : MonoBehaviour
     [SerializeField]
     private LayerMask cctvLayerMask;
 
+    private RaycastHit _hit;
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
             {
-                if(hit.transform.parent.gameObject.layer == (int)cctvLayerMask)
-                {
-                    Debug.Log("link");
-                    Transform transform = hit.transform.parent;
-                    transform.GetComponent<CCTV>().ZoomIn();
-                }
+                _hit.transform.GetComponent<CCTV>().ZoomIn();
             }
         }
-
     }
 }
