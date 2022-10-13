@@ -5,25 +5,31 @@ using UnityEngine;
 
 public class CameraRay : MonoBehaviour
 {
-    [SerializeField]
-    private float range = 10f;
+    [SerializeField] private float range = 10f;
 
-    [SerializeField]
-    private RaycastHit hitinfo;
+    [SerializeField] private RaycastHit hitinfo;
 
-    [SerializeField]
-    private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask;
+
+    [SerializeField] private List<GameObject> findList = null;
+
+    private Camera cam;
 
     string infoname = null;
 
     void Start()
     {
-        
+        cam = UnityEngine.Camera.main;
     }
 
     void Update()
     {
-        RayCastShoot();    
+        RayCastShoot();
+        
+    }
+    private void LateUpdate()
+    {
+        CheckingInview();
     }
 
     private void RayCastShoot()
@@ -35,6 +41,18 @@ public class CameraRay : MonoBehaviour
                 EventManager.eventManager.InfoUP();
             }
 
+        }
+    }
+
+    private void CheckingInview()
+    {
+        for(int i = 0; i < findList.Count; i++)
+        {
+            Vector3 viewPos = cam.WorldToViewportPoint(findList[i].transform.position);
+            if(viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
+            {
+                Debug.Log($"Camera in object : {findList[i].name}");
+            }
         }
     }
 

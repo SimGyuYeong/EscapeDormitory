@@ -406,10 +406,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 308919725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf9abac30022934fa22a5f61c0bc0ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d209fb63d0a76d43ba23ccbf78ddcfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objTarget: {fileID: 1529240084}
+  objTarget: {fileID: 41486}
   rotateSpeed: 4
   detailX: 2
   detailY: 2
@@ -417,8 +417,8 @@ MonoBehaviour:
   rotationY: 0
   minY: 0
   maxY: 0
-  posFirstameraTarget: {fileID: 41490}
-  character: {fileID: 1529240085}
+  posFirstameraTarget: {fileID: 1529240085}
+  character: {fileID: 41490}
 --- !u!114 &308919730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +435,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  findList:
+  - {fileID: 1845679311}
 --- !u!1 &658679314
 GameObject:
   m_ObjectHideFlags: 0
