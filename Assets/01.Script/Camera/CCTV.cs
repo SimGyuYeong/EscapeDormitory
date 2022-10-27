@@ -5,41 +5,23 @@ using DG.Tweening;
 
 public class CCTV : MonoBehaviour
 {
-    [Tooltip("멈춰있는 시간")]
+    [Tooltip("돌아가는 속도")]
     [SerializeField]
-    private float _waitDuration = 1f;
-
-    [Tooltip("한바퀴 도는데 걸리는 시간")]
-    [SerializeField]
-    private float _moveDuration = 3f;
+    private float _rotateAmount = 0.5f;
 
     [SerializeField]
-    private Camera _linkCam;
+    private GameObject _linkCam;
 
-    private Vector3 _leftRotateVec;
-    private Vector3 _rightRotateVec;
-
-    Sequence _camAutoMoveSeq;
+    private Transform _rotateTrm;
 
     private void Start()
     {
-        _leftRotateVec = new Vector3(_linkCam.transform.eulerAngles.x, _linkCam.transform.eulerAngles.y - 30f, _linkCam.transform.eulerAngles.z);
-        _rightRotateVec = new Vector3(_linkCam.transform.eulerAngles.x, _linkCam.transform.eulerAngles.y + 30f, _linkCam.transform.eulerAngles.z);
-
-        _linkCam.transform.DORotate(_leftRotateVec, 0);
-
-        _camAutoMoveSeq = DOTween.Sequence()
-            .SetAutoKill(false)
-            .Append(_linkCam.transform.DORotate(_rightRotateVec, _moveDuration).SetEase(Ease.InSine))
-            .AppendInterval(_waitDuration)
-            .Append(_linkCam.transform.DORotate(_leftRotateVec, _moveDuration).SetEase(Ease.InSine))
-            .AppendInterval(_waitDuration)
-            .SetLoops(-1);
+        _rotateTrm = _linkCam.transform.GetChild(0);
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        _camAutoMoveSeq.Restart();
+         _rotateTrm.rotation = Quaternion.Euler(_rotateTrm.eulerAngles.x, (Mathf.Sin(Time.realtimeSinceStartup) * _rotateAmount) + _rotateTrm.eulerAngles.y, _rotateTrm.eulerAngles.z);
     }
 
     public Material ZoomIn()
