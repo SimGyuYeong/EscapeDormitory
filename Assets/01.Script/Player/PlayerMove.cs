@@ -90,10 +90,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
+        //}
         _jumpVelocity.y += _verticalSpd;
         _characterController.Move(_jumpVelocity * Time.deltaTime);
     }

@@ -5,23 +5,41 @@ using DG.Tweening;
 
 public class CCTV : MonoBehaviour
 {
-    [Tooltip("돌아가는 속도")]
+    [Tooltip("돌아가는 시간")]
     [SerializeField]
-    private float _rotateAmount = 0.5f;
+    private float _rotateDuration = 5f;
 
     [SerializeField]
     private GameObject _linkCam;
 
     private Transform _rotateTrm;
 
+    private Vector3 _minRotate;
+    private Vector3 _maxRotate;
+
+
     private void Start()
     {
         _rotateTrm = _linkCam.transform.GetChild(0);
+
+        _minRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y - 80f, _rotateTrm.localRotation.z);
+        _maxRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y + 80f, _rotateTrm.localRotation.z);
+
+        _rotateTrm.rotation = Quaternion.Euler(_minRotate);
+        StartCoroutine(MoveCoroutine());
     }
 
-    private void Update()
+    private IEnumerator MoveCoroutine()
     {
-         _rotateTrm.rotation = Quaternion.Euler(_rotateTrm.eulerAngles.x, (Mathf.Sin(Time.realtimeSinceStartup) * _rotateAmount) + _rotateTrm.eulerAngles.y, _rotateTrm.eulerAngles.z);
+        while(true)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(_rotateTrm.DORotate(_maxRotate, _rotateDuration)); 
+            seq.AppendInterval(0.8f);
+            seq.Append(_rotateTrm.DORotate(_minRotate, _rotateDuration));
+            seq.AppendInterval(0.8f);
+            yield return new WaitForSeconds(seq.Duration());
+        }
     }
 
     public Material ZoomIn()

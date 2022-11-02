@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15447f8222b896f45a4dcef2449949eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateAmount: 0.2
+  _rotateAmount: 4
   _linkCam: {fileID: 283290747}
 --- !u!1 &2076521770
 GameObject:
