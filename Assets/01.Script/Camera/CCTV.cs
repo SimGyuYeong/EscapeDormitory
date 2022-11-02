@@ -5,9 +5,9 @@ using DG.Tweening;
 
 public class CCTV : MonoBehaviour
 {
-    [Tooltip("돌아가는 속도")]
+    [Tooltip("돌아가는 시간")]
     [SerializeField]
-    private float _rotateAmount = 0.5f;
+    private float _rotateDuration = 5f;
 
     [SerializeField]
     private GameObject _linkCam;
@@ -22,8 +22,8 @@ public class CCTV : MonoBehaviour
     {
         _rotateTrm = _linkCam.transform.GetChild(0);
 
-        _minRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y - 5f, _rotateTrm.localRotation.z);
-        _maxRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y + 5f, _rotateTrm.localRotation.z);
+        _minRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y - 80f, _rotateTrm.localRotation.z);
+        _maxRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y + 80f, _rotateTrm.localRotation.z);
 
         _rotateTrm.rotation = Quaternion.Euler(_minRotate);
         StartCoroutine(MoveCoroutine());
@@ -34,8 +34,10 @@ public class CCTV : MonoBehaviour
         while(true)
         {
             Sequence seq = DOTween.Sequence();
-            seq.Append(_rotateTrm.DORotate(_maxRotate, _rotateAmount)).SetEase(Ease.InOutQuad);
-            seq.Append(_rotateTrm.DORotate(_minRotate, _rotateAmount)).SetEase(Ease.InOutQuad);
+            seq.Append(_rotateTrm.DORotate(_maxRotate, _rotateDuration)); 
+            seq.AppendInterval(0.8f);
+            seq.Append(_rotateTrm.DORotate(_minRotate, _rotateDuration));
+            seq.AppendInterval(0.8f);
             yield return new WaitForSeconds(seq.Duration());
         }
     }
