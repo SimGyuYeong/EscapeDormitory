@@ -14,14 +14,30 @@ public class CCTV : MonoBehaviour
 
     private Transform _rotateTrm;
 
+    private Vector3 _minRotate;
+    private Vector3 _maxRotate;
+
+
     private void Start()
     {
         _rotateTrm = _linkCam.transform.GetChild(0);
+
+        _minRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y - 5f, _rotateTrm.localRotation.z);
+        _maxRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y + 5f, _rotateTrm.localRotation.z);
+
+        _rotateTrm.rotation = Quaternion.Euler(_minRotate);
+        StartCoroutine(MoveCoroutine());
     }
 
-    private void Update()
+    private IEnumerator MoveCoroutine()
     {
-         _rotateTrm.rotation = Quaternion.Euler(_rotateTrm.eulerAngles.x, (Mathf.Sin(Time.realtimeSinceStartup) * _rotateAmount) + _rotateTrm.eulerAngles.y, _rotateTrm.eulerAngles.z);
+        while(true)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(_rotateTrm.DORotate(_maxRotate, _rotateAmount)).SetEase(Ease.InOutQuad);
+            seq.Append(_rotateTrm.DORotate(_minRotate, _rotateAmount)).SetEase(Ease.InOutQuad);
+            yield return new WaitForSeconds(seq.Duration());
+        }
     }
 
     public Material ZoomIn()

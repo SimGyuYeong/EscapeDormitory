@@ -19,7 +19,7 @@ public class CCTVViewer : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         { 
-            if (Physics.Raycast(transform.position, transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
+            if (Physics.Raycast(transform.position, Camera.main.transform.forward, out _hit, Mathf.Infinity, cctvLayerMask))
             {
                 _viewCCtv = _hit.transform.GetComponent<CCTV>();
                 Material mat = _viewCCtv.ZoomIn();
