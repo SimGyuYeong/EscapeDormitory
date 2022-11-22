@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController _characterController;
+    private CCTVViewer _cctvViewer;
     private CollisionFlags collisionsFlags = CollisionFlags.None;
 
     [SerializeField] private float _walkSpd = 5.0f;
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _cctvViewer = GetComponent<CCTVViewer>();
     }
 
     private void Update()
@@ -47,6 +49,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
+        if (_cctvViewer.CCTVVIewing == true)
+            return;
+
         if (_characterController.isGrounded && _jumpVelocity.y < 0)
         {
             _jumpVelocity.y = 0f;
@@ -85,10 +90,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    _jumpVelocity.y += Mathf.Sqrt(3f * -3.0f * -9.81f);
+        //}
         _jumpVelocity.y += _verticalSpd;
         _characterController.Move(_jumpVelocity * Time.deltaTime);
     }

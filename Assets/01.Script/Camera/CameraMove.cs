@@ -34,6 +34,9 @@ public class CameraMove : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (character.GetComponent<CCTVViewer>().CCTVVIewing == true)
+            return;
+
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 

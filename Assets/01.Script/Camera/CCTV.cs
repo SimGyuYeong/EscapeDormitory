@@ -5,51 +5,45 @@ using DG.Tweening;
 
 public class CCTV : MonoBehaviour
 {
-    [Tooltip("멈춰있는 시간")]
+    [Tooltip("돌아가는 시간")]
     [SerializeField]
-    private float _waitDuration = 1f;
-
-    [Tooltip("한바퀴 도는데 걸리는 시간")]
-    [SerializeField]
-    private float _moveDuration = 3f;
+    private float _rotateDuration = 5f;
 
     [SerializeField]
-    private Camera _linkCam;
+    private GameObject _linkCam;
 
-    private Vector3 _leftRotateVec;
-    private Vector3 _rightRotateVec;
+    private Transform _rotateTrm;
 
-    Sequence _camAutoMoveSeq;
+    private Vector3 _minRotate;
+    private Vector3 _maxRotate;
+
 
     private void Start()
     {
-        _leftRotateVec = new Vector3(_linkCam.transform.eulerAngles.x, _linkCam.transform.eulerAngles.y - 30f, _linkCam.transform.eulerAngles.z);
-        _rightRotateVec = new Vector3(_linkCam.transform.eulerAngles.x, _linkCam.transform.eulerAngles.y + 30f, _linkCam.transform.eulerAngles.z);
+        _rotateTrm = _linkCam.transform.GetChild(0);
 
-        _linkCam.transform.DORotate(_leftRotateVec, 0);
+        _minRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y - 80f, _rotateTrm.localRotation.z);
+        _maxRotate = new Vector3(_rotateTrm.localRotation.x, _rotateTrm.localRotation.y + 80f, _rotateTrm.localRotation.z);
 
-        _camAutoMoveSeq = DOTween.Sequence()
-            .SetAutoKill(false)
-            .Append(_linkCam.transform.DORotate(_rightRotateVec, _moveDuration).SetEase(Ease.InSine))
-            .AppendInterval(_waitDuration)
-            .Append(_linkCam.transform.DORotate(_leftRotateVec, _moveDuration).SetEase(Ease.InSine))
-            .AppendInterval(_waitDuration)
-            .SetLoops(-1);
+        _rotateTrm.rotation = Quaternion.Euler(_minRotate);
+        StartCoroutine(MoveCoroutine());
     }
 
-    private void OnEnable()
+    private IEnumerator MoveCoroutine()
     {
-        _camAutoMoveSeq.Restart();
+        while(true)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Append(_rotateTrm.DORotate(_maxRotate, _rotateDuration)); 
+            seq.AppendInterval(0.8f);
+            seq.Append(_rotateTrm.DORotate(_minRotate, _rotateDuration));
+            seq.AppendInterval(0.8f);
+            yield return new WaitForSeconds(seq.Duration());
+        }
     }
 
     public Material ZoomIn()
     {
-        _camAutoMoveSeq.Kill();
         return transform.GetComponent<MeshRenderer>().material;
-    }
-
-    public void ZoomOut()
-    {
-        _camAutoMoveSeq.Restart();
     }
 }
