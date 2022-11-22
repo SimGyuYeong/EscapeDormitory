@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - bell
+  - Item
   layers:
   - Default
   - TransparentFX

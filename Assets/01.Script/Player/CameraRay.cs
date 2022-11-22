@@ -2,17 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using DG.Tweening;
 
 public class CameraRay : MonoBehaviour
 {
     [SerializeField] private float range = 10f;
 
+    [SerializeField] private float itemCheckrange = 0f;
+
     [SerializeField] private RaycastHit hitinfo;
 
     [SerializeField] private LayerMask layerMask;
 
-    [SerializeField] private List<GameObject> findList = null;
+    //[SerializeField] private UnityEvent ItemInfoEvent;
 
+
+
+
+    
+    
     private Camera cam;
 
     string infoname = null;
@@ -20,49 +30,34 @@ public class CameraRay : MonoBehaviour
     void Start()
     {
         cam = UnityEngine.Camera.main;
+        
     }
 
     void Update()
     {
-        RayCastShoot();
-        
-    }
-    private void LateUpdate()
-    {
         CheckingInview();
     }
-
-    private void RayCastShoot()
-    {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, range, layerMask))
-        {
-            if (hitinfo.transform.tag == "bell")
-            {
-                EventManager.eventManager.InfoUP();
-            }
-
-        }
-    }
-
     private void CheckingInview()
     {
-        for(int i = 0; i < findList.Count; i++)
+        Collider[] ItemTargets = Physics.OverlapSphere(transform.position, itemCheckrange, layerMask);
+
+        for(int i = 0; i < ItemTargets.Length; i++)
         {
-            Vector3 viewPos = cam.WorldToViewportPoint(findList[i].transform.position);
-            if(viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
+            Vector3 viewPos = cam.WorldToViewportPoint(ItemTargets[i].transform.position);
+
+            if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
             {
-                Debug.Log($"Camera in object : {findList[i].name}");
+                Debug.Log("Ã¼Å·µÊ");
+                if(Physics.Raycast(transform.position, transform.forward, out hitinfo))
+                {
+                    if(hitinfo.transform.CompareTag("Item"))
+                    {
+
+                    }
+                
+                }    
             }
         }
     }
 
-    
-
-        
-
-
-
-    
-
-    
 }
