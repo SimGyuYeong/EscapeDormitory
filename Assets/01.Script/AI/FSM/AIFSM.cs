@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class AIFSM : MonoBehaviour
 {
@@ -60,14 +59,11 @@ public class AIFSM : MonoBehaviour
 
     public Transform SearchNextTargetPosition()
     {
-        posTarget = null;
-        if (posTargets.Length > 0)
+        if(posTargets.Length > 0)
         {
-            posTarget = posTargets[posTargetsIdx];
+            posTarget = posTargets[Random.Range(0, posTargets.Length)];
         }
 
-        posTargetsIdx = (posTargetsIdx + 1) % posTargets.Length;
-
-        return posTarget;
+        return null;
     }
 }
