@@ -13,7 +13,15 @@ public class CCTVViewer : MonoBehaviour
 
     [SerializeField]
     private RawImage _image;
-    public bool CCTVVIewing => _image.gameObject.activeSelf;
+    //public bool CCTVVIewing => _image.gameObject.activeSelf;
+    public bool CCTVViewing
+    {
+        get
+        {
+            if(_image != null) return _image.gameObject.activeSelf;
+            return false;
+        }
+    }
 
     private void Update()
     {
