@@ -49,7 +49,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        if (_cctvViewer.CCTVVIewing == true)
+        if (_cctvViewer.CCTVViewing == true)
             return;
 
         if (_characterController.isGrounded && _jumpVelocity.y < 0)
