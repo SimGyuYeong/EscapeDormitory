@@ -63,7 +63,6 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
         
         if(isfocus == true)
         {
-            Debug.Log("초점 맞춰짐");
             depthOfField.focalLength.value -= focalLengthValue * Time.deltaTime;
             _isFocuson = true;
         }
@@ -73,7 +72,6 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
         
         if(isfocus == true)
         {
-            Debug.Log("초점 풀려짐");
             depthOfField.focalLength.value += focalLengthValue * Time.deltaTime;
             _isFocusoff = true;
         }
@@ -83,5 +81,19 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
     public void MonsterOn()
     {
         Monster.SetActive(true);
+    }
+
+    public void MonsterOff()
+    {
+        Monster.SetActive(false);
+    }
+    
+    public IEnumerator GameStart()
+    {
+        while(postProcess.weight <= 0)
+        {
+            yield return new WaitForSeconds(0.15f);
+            postProcess.weight += 0.01f;
+        }
     }
 }
