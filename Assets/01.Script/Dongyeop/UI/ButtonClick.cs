@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class ButtonClick : MonoBehaviour
 {
-    [SerializeField] private int _nextScene;
-
+    public void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
     public void SceneChanger()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(_nextScene);
+        SceneManager.LoadScene("GameScene");
     }
 
     public void GameExit()
@@ -20,5 +25,15 @@ public class ButtonClick : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void GotoMenuScene()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }

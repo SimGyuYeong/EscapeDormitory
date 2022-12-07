@@ -56,7 +56,6 @@ public class StateRoaming : State<AIFSM>
         }
         else
         {
-            Debug.Log("===a" + agent.remainingDistance + ":" + agent.stoppingDistance + "/n");
             if (!agent.pathPending && (agent.remainingDistance <= agent.stoppingDistance + 0.01f))
             {
                 stateMachineClass.SearchNextTargetPosition();
