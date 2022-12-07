@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/07.Scenes/StartMenu.unity
     guid: 54220427d2fa7b74d84c3a8ae864b505
   - enabled: 1
-    path: Assets/07.Scenes/StartTimeLine.unity
+    path: Assets/07.Scenes/GameScene.unity
     guid: 85812c891ed9d39429abb77110127f9b
+  - enabled: 1
+    path: Assets/07.Scenes/GameOverScene.unity
+    guid: 024108cb051ddeb42b0207d144d9cd42
   m_configObjects: {}

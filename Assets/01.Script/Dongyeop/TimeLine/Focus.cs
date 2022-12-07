@@ -31,6 +31,7 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
         depthOfField.aperture.value = 0.1f;
         depthOfField.focalLength.value = 300f;
         StartCoroutine(ApertureChangeSetting());
+
     }
 
     private IEnumerator ApertureChangeSetting()
@@ -88,12 +89,18 @@ public class Focus : MonoBehaviour //포커스를 맞췄다, 풀었다 하는 스크립트
         Monster.SetActive(false);
     }
     
-    public IEnumerator GameStart()
+    public void GameStartsignal()
     {
-        while(postProcess.weight <= 0)
+        StartCoroutine(GameStart());
+    }
+
+    IEnumerator GameStart()
+    {
+        while (postProcess.weight <= 1)
         {
-            yield return new WaitForSeconds(0.15f);
-            postProcess.weight += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            Debug.Log("앙");
+            postProcess.weight -= 0.01f;
         }
     }
 }

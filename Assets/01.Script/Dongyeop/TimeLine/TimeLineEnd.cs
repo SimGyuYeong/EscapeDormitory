@@ -8,6 +8,11 @@ public class TimeLineEnd : MonoBehaviour //타임라인 종료시 실행
 {
     [SerializeField] private PostProcessProfile _noneProfile;
 
+    private CameraRay cmRay;
+    private CameraMove cmMove;
+
+    public GameObject Player;
+
     private Focus _focus;
     private Flicker _flicker;
 
@@ -18,6 +23,8 @@ public class TimeLineEnd : MonoBehaviour //타임라인 종료시 실행
         _focus = GetComponent<Focus>();
         _flicker = GetComponent<Flicker>();
         _blackImage = GameObject.Find("BlackImage").GetComponent<Image>();
+        cmMove = GetComponent<CameraMove>();
+        cmRay = GetComponent<CameraRay>();
     }
 
     public void TimeLineend()
@@ -28,6 +35,11 @@ public class TimeLineEnd : MonoBehaviour //타임라인 종료시 실행
 
         _focus.enabled = false;
         _flicker.enabled = false;
+
+        cmMove.enabled = true;
+        cmRay.enabled = true;
+        Player.gameObject.SetActive(true);
+
     }
 
     public void TimeLineFadeOutEnd()
