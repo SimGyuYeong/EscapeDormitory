@@ -58,8 +58,12 @@ public class StateRoaming : State<AIFSM>
         {
             if (!agent.pathPending && (agent.remainingDistance <= agent.stoppingDistance + 0.01f))
             {
+                Debug.Log(GameObject.FindObjectOfType<AIFSM>(true).transform.position);
+                Debug.Log(agent.remainingDistance + " " + stateMachineClass.posTarget);
                 stateMachineClass.SearchNextTargetPosition();
                 stateMachine.ChangeState<StateIdle>();
+                Debug.Log(GameObject.FindObjectOfType<AIFSM>(true).posTarget.position);
+                //Debug.Log(agent.remainingDistance + " " + stateMachineClass.target + GameObject.FindObjectOfType<AIFSM>(true).target.position );
             }
             else
             {

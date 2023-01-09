@@ -14,6 +14,8 @@ public class AIFSM : MonoBehaviour
 
     public Transform[] posTargets;
     public Transform posTarget = null;
+
+    private Queue<Transform> targetQ = new Queue<Transform>();
     private int posTargetsIdx = 0;
 
     public float atkRange;
@@ -59,9 +61,29 @@ public class AIFSM : MonoBehaviour
 
     public Transform SearchNextTargetPosition()
     {
+        if(targetQ.Count<=0)
+        {
+            List<int >indexArr = new List<int>();
+
+            for(int i=0;i<posTargets.Length; i++)
+            {
+                indexArr.Add(i);
+            }
+            int posLength = posTargets.Length;
+            for(int i=posTargets.Length;i>0;i--)
+            {
+                int index = Random.Range(0, posLength);
+                targetQ.Enqueue(posTargets [indexArr[index]]);
+                indexArr.RemoveAt(index);
+                
+                posLength--;
+            }
+        }
+
         if(posTargets.Length > 0)
         {
-            posTarget = posTargets[Random.Range(0, posTargets.Length)];
+            posTarget = targetQ.Dequeue();
+            print(posTarget);
         }
 
         return null;
